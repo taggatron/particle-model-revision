@@ -1,0 +1,564 @@
+/* GCSE Physics Revision Grid - Particle Model, Density & Pressure
+   Copied and enhanced from B1revision with Green Pen Marking & Points System
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a00e0 100%);
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+    color: #333;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tier-pill {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+}
+
+header h1 {
+    font-size: 2.3rem;
+    margin-bottom: 8px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+header p.subtitle {
+    font-size: 1.15rem;
+    opacity: 0.92;
+    margin-bottom: 18px;
+}
+
+/* Topic Filter Bar */
+.topic-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: white;
+    color: #1e3c72;
+    border-color: white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Progress Tracker */
+.progress-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.22);
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.progress-info {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-info strong {
+    font-weight: 700;
+    color: #ffd166;
+}
+
+.score-badge {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #06d6a0 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+/* Flashcard Container Grid */
+.flashcard-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* Flashcard Dimensions & Perspective */
+.flashcard {
+    height: 360px;
+    perspective: 1000px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.flashcard:focus-visible .card-inner {
+    box-shadow: 0 0 0 3px #ffd166, 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.flashcard.hidden {
+    display: none;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.flashcard.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Card Front & Back Base */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+/* Card Front Styling */
+.card-front {
+    background: linear-gradient(135deg, #ffffff 0%, #f6f9fc 100%);
+    color: #1e293b;
+}
+
+/* Card Back Base Styling */
+.card-back {
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Topic Back Gradients */
+.card-back.topic-matter {
+    background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+}
+.card-back.topic-heat {
+    background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+}
+.card-back.topic-pressure {
+    background: linear-gradient(135deg, #d97706 0%, #eab308 100%);
+}
+.card-back.topic-density {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+/* Top Meta Row */
+.card-meta-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.question-number, .answer-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.3px;
+    color: #1e293b;
+}
+
+.card-back .answer-label {
+    background: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+}
+
+/* Points Badge */
+.points-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.4px;
+}
+
+.pts-1 {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+.pts-2 {
+    background: #d1fae5;
+    color: #047857;
+}
+.pts-3 {
+    background: #fef3c7;
+    color: #b45309;
+}
+.pts-4 {
+    background: #fce7f3;
+    color: #be185d;
+}
+
+/* Topic Tag */
+.topic-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.topic-tag.topic-matter {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+.topic-tag.topic-heat {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+.topic-tag.topic-pressure {
+    background: #fef3c7;
+    color: #92400e;
+}
+.topic-tag.topic-density {
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+/* Green Pen Marking Badge */
+.green-pen-badge {
+    background: #047857;
+    color: #ecfdf5;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.4px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.answer-points-banner {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+}
+
+/* Text Containers */
+.question-text, .answer-text {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    line-height: 1.45;
+    font-weight: 600;
+    color: #1e293b;
+    text-align: center;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.answer-text {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+    padding: 0 6px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom Scrollbars */
+.question-text::-webkit-scrollbar,
+.answer-text::-webkit-scrollbar {
+    width: 4px;
+}
+.question-text::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.answer-text::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+}
+
+/* Click Hint */
+.click-hint {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: 6px;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+.card-front .click-hint {
+    color: #64748b;
+}
+
+.card-back .click-hint {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hover Effects */
+.flashcard:hover .card-inner {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+}
+
+.flashcard.flipped:hover .card-inner {
+    transform: rotateY(180deg) translateY(-6px);
+}
+
+/* Footer & Buttons */
+footer {
+    text-align: center;
+    margin-top: 48px;
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.ctrl-btn {
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ff5252 0%, #d63031 100%);
+}
+
+.flip-all-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+}
+
+.flip-all-btn:hover {
+    background: rgba(255, 255, 255, 0.32);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.ctrl-btn:active {
+    transform: translateY(0);
+}
+
+.footer-tip {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+.footer-tip kbd {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-family: inherit;
+    font-size: 0.88rem;
+}
+
+.footer-note {
+    font-size: 0.88rem;
+    opacity: 0.75;
+}
+
+/* Staggered Animations */
+.flashcard {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flashcard:nth-child(1)  { animation-delay: 0.05s; }
+.flashcard:nth-child(2)  { animation-delay: 0.10s; }
+.flashcard:nth-child(3)  { animation-delay: 0.15s; }
+.flashcard:nth-child(4)  { animation-delay: 0.20s; }
+.flashcard:nth-child(5)  { animation-delay: 0.25s; }
+.flashcard:nth-child(6)  { animation-delay: 0.30s; }
+.flashcard:nth-child(7)  { animation-delay: 0.35s; }
+.flashcard:nth-child(8)  { animation-delay: 0.40s; }
+.flashcard:nth-child(9)  { animation-delay: 0.45s; }
+.flashcard:nth-child(10) { animation-delay: 0.50s; }
+.flashcard:nth-child(11) { animation-delay: 0.55s; }
+.flashcard:nth-child(12) { animation-delay: 0.60s; }
+.flashcard:nth-child(13) { animation-delay: 0.65s; }
+.flashcard:nth-child(14) { animation-delay: 0.70s; }
+.flashcard:nth-child(15) { animation-delay: 0.75s; }
+.flashcard:nth-child(16) { animation-delay: 0.80s; }
+
+/* Responsive Layout */
+@media (max-width: 1280px) {
+    .flashcard-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+    .flashcard {
+        height: 360px;
+    }
+}
+
+@media (max-width: 960px) {
+    .flashcard-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    header h1 {
+        font-size: 1.95rem;
+    }
+}
+
+@media (max-width: 620px) {
+    body {
+        padding: 16px 10px 32px;
+    }
+    .flashcard-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0;
+    }
+    .flashcard {
+        height: 340px;
+    }
+    header h1 {
+        font-size: 1.6rem;
+    }
+    header p.subtitle {
+        font-size: 0.98rem;
+    }
+    .topic-filter-bar {
+        gap: 6px;
+    }
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.84rem;
+    }
+    .card-front, .card-back {
+        padding: 14px 14px;
+    }
+    .question-text {
+        font-size: 1.1rem;
+    }
+    .answer-text {
+        font-size: 1.05rem;
+    }
+}

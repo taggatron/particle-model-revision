@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSE Physics Revision Grid | Particle Model, Density, Pressure & Heat (Foundation)</title>
+    <meta name="description" content="GCSE Science Foundation revision flashcard grid with point-based questions and green pen answers covering States of Matter, Specific & Latent Heat, Gas Pressure, and Density.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="tier-pill">GCSE Science Foundation • Revision Grid & Green Pen Marking</div>
+        <h1>Physics Revision: Matter, Heat, Pressure & Density</h1>
+        <p class="subtitle">Click on any card to reveal the green pen answer • 4x4 Grid (1–4 Points)</p>
+
+        <!-- Topic Filter Buttons matching the 4 rows -->
+        <div class="topic-filter-bar" role="tablist" aria-label="Topic filters">
+            <button class="filter-btn active" data-topic="all" role="tab" aria-selected="true">All Rows (16 Cards • 40 Pts)</button>
+            <button class="filter-btn" data-topic="matter" role="tab" aria-selected="false">🧊 Row 1: States & Changes (10 Pts)</button>
+            <button class="filter-btn" data-topic="heat" role="tab" aria-selected="false">🔥 Row 2: Heat & Latent Heat (10 Pts)</button>
+            <button class="filter-btn" data-topic="pressure" role="tab" aria-selected="false">🎈 Row 3: Gas Pressure (10 Pts)</button>
+            <button class="filter-btn" data-topic="density" role="tab" aria-selected="false">⚖️ Row 4: Density & Floating (10 Pts)</button>
+        </div>
+
+        <!-- Study & Points Tracker -->
+        <div class="progress-wrap">
+            <div class="progress-info">
+                <span>Cards flipped: <strong id="flipped-count">0</strong> / <strong id="total-count">16</strong></span>
+                <span class="score-badge">Points Revealed: <strong id="score-count">0</strong> / <strong id="max-score">40</strong> pts</span>
+            </div>
+            <div class="progress-bar-bg" aria-hidden="true">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="flashcard-container" id="flashcard-container">
+            <!-- Flashcards generated dynamically by script.js -->
+        </div>
+    </main>
+    
+    <footer>
+        <div class="action-buttons">
+            <button id="flip-all-button" class="ctrl-btn flip-all-btn">Flip All Cards</button>
+            <button id="reset-button" class="ctrl-btn reset-btn">Reset All Cards</button>
+        </div>
+        <p class="footer-tip">Keyboard hint: Press <kbd>Tab</kbd> to focus any card and <kbd>Enter</kbd> or <kbd>Space</kbd> to flip.</p>
+        <p class="footer-note">Green Pen Marking scheme aligned with GCSE Foundation Science</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
