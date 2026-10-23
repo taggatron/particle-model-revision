@@ -22,7 +22,34 @@ const flashcards = [
         points: 2,
         pointsLabel: "2 Points • Describe",
         question: "How are particles arranged in a solid?",
-        answer: "Tightly packed together in neat/regular rows (vibrating on the spot)."
+        answer: `
+            <div class="solid-model-container" aria-label="Animation of solid particles in regular rows vibrating about fixed positions">
+                <div class="solid-lattice" title="Particles in neat rows vibrating about fixed points">
+                    <span class="particle p-1"></span>
+                    <span class="particle p-2"></span>
+                    <span class="particle p-3"></span>
+                    <span class="particle p-4"></span>
+                    <span class="particle p-5"></span>
+                    <span class="particle p-2"></span>
+                    <span class="particle p-4"></span>
+                    <span class="particle p-1"></span>
+                    <span class="particle p-5"></span>
+                    <span class="particle p-3"></span>
+                    <span class="particle p-3"></span>
+                    <span class="particle p-1"></span>
+                    <span class="particle p-5"></span>
+                    <span class="particle p-2"></span>
+                    <span class="particle p-4"></span>
+                    <span class="particle p-4"></span>
+                    <span class="particle p-5"></span>
+                    <span class="particle p-2"></span>
+                    <span class="particle p-3"></span>
+                    <span class="particle p-1"></span>
+                </div>
+                <div class="solid-model-caption">Neat rows • Vibrating about fixed points</div>
+            </div>
+            <p class="answer-main"><strong>Tightly packed together</strong> in <strong>neat/regular rows</strong> (vibrating on the spot).</p>
+        `
     },
     {
         id: 3,

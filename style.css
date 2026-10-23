@@ -562,3 +562,114 @@ footer {
         font-size: 1.05rem;
     }
 }
+
+/* Solid Particle Lattice Animation (Answer 2) */
+.solid-model-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    padding: 8px 12px 6px;
+    margin: 4px auto 8px;
+    width: fit-content;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.solid-lattice {
+    display: grid;
+    grid-template-columns: repeat(5, 20px);
+    grid-template-rows: repeat(4, 20px);
+    gap: 3px;
+    justify-content: center;
+    align-content: center;
+    padding: 2px;
+}
+
+.solid-lattice .particle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #7dd3fc 35%, #0284c7 75%, #075985 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    display: inline-block;
+    will-change: transform;
+}
+
+/* Vibrating keyframes - random high-frequency micro-movements about fixed origin */
+@keyframes vibrate-1 {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(-1.2px, 1.2px); }
+    40%  { transform: translate(1.4px, -0.8px); }
+    60%  { transform: translate(-0.8px, -1.4px); }
+    80%  { transform: translate(1.2px, 0.9px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes vibrate-2 {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(1.3px, -1px); }
+    40%  { transform: translate(-1.1px, 1.3px); }
+    60%  { transform: translate(0.9px, 1.1px); }
+    80%  { transform: translate(-1.3px, -0.8px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes vibrate-3 {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(-0.9px, -1.3px); }
+    40%  { transform: translate(1.2px, 1px); }
+    60%  { transform: translate(-1.3px, 0.7px); }
+    80%  { transform: translate(0.8px, -1.1px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes vibrate-4 {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(1.1px, 1.2px); }
+    40%  { transform: translate(-1.3px, -1px); }
+    60%  { transform: translate(1px, -1.3px); }
+    80%  { transform: translate(-0.7px, 1.1px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes vibrate-5 {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(0.7px, -1.4px); }
+    40%  { transform: translate(-1.2px, 0.8px); }
+    60%  { transform: translate(1.3px, 0.9px); }
+    80%  { transform: translate(-1px, -1.2px); }
+    100% { transform: translate(0, 0); }
+}
+
+.solid-lattice .particle.p-1 { animation: vibrate-1 0.16s infinite ease-in-out; }
+.solid-lattice .particle.p-2 { animation: vibrate-2 0.20s infinite ease-in-out; }
+.solid-lattice .particle.p-3 { animation: vibrate-3 0.18s infinite ease-in-out; }
+.solid-lattice .particle.p-4 { animation: vibrate-4 0.22s infinite ease-in-out; }
+.solid-lattice .particle.p-5 { animation: vibrate-5 0.19s infinite ease-in-out; }
+
+.solid-model-caption {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #ffd166;
+    margin-top: 5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.answer-main {
+    font-size: 1.02rem;
+    line-height: 1.45;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.answer-main strong {
+    color: #ffd166;
+    font-weight: 700;
+}
